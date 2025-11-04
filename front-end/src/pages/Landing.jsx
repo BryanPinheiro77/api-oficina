@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import About from "../components/About";
@@ -9,21 +9,39 @@ import Footer from "../components/Footer";
 import "../styles/landing.css";
 
 export default function Landing() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target;
+          if (entry.isIntersecting) {
+            target.classList.add("visible");
+          } else {
+            target.classList.remove("visible"); // remove quando sai da tela
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+  }, []);
+
   return (
     <div className="landing">
       <Header />
-      <main>
+      <main style={{ marginTop: "80px" }}>
         <Hero />
-        <section id="about">
+        <section id="about" className="fade-in">
           <About />
         </section>
-        <section id="services">
+        <section id="services" className="fade-in">
           <Services />
         </section>
-        <section id="testimonials">
+        <section id="testimonials" className="fade-in">
           <Testimonials />
         </section>
-        <section id="contact">
+        <section id="contact" className="fade-in">
           <Contact />
         </section>
       </main>

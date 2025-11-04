@@ -1,11 +1,20 @@
 import "./Hero.css";
+import { useEffect } from "react";
 
 export default function Hero() {
+  useEffect(() => {
+    // Animação de entrada quando a página carrega
+    const heroEl = document.querySelector(".hero-content");
+    if (heroEl) {
+      heroEl.classList.add("hero-animate");
+    }
+  }, []);
+
   return (
     <section className="hero">
       <div className="hero-background">
         <img
-          src="https://images.unsplash.com/photo-1588294020274-1e23a4815b72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXIlMjByYWRpYXRvciUyMHdvcmtzaG9wfGVufDF8fHx8MTc2MjIyMTA1MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          src="https://images.unsplash.com/photo-1588294020274-1e23a4815b72?auto=format&fit=crop&w=1080&q=80"
           alt="Oficina Radiadores Pinheiro"
           className="hero-img"
         />

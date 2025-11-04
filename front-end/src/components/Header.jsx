@@ -27,16 +27,16 @@ export default function Header({ onLoginClick }) {
           </button>
 
           <nav className="header-nav">
-            <a href="#servicos" className="header-nav-link">
+            <a href="#services" className="header-nav-link">
               Serviços
             </a>
-            <a href="#sobre" className="header-nav-link">
+            <a href="#about" className="header-nav-link">
               Sobre
             </a>
-            <a href="#depoimentos" className="header-nav-link">
+            <a href="#testimonials" className="header-nav-link">
               Depoimentos
             </a>
-            <a href="#contato" className="header-nav-btn">
+            <a href="#contact" className="header-nav-btn">
               Contato
             </a>
           </nav>
