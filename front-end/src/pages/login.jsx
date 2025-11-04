@@ -12,15 +12,15 @@ export default function Login() {
       const resp = await api.post('/login', { email, senha });
       localStorage.setItem('token', resp.data.token);
       window.location.href = '/dashboard';
-    } catch {
+    } catch (err) {
       alert('Credenciais inválidas');
     }
   }
 
   return (
-    <div className="login-container">
-      <form className="login-box" onSubmit={handleLogin}>
-        <h2>Login - Oficina</h2>
+    <div className="login-box">
+      <h2>Login - Oficina</h2>
+      <form onSubmit={handleLogin}>
         <input
           type="text"
           placeholder="E-mail"

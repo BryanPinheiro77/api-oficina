@@ -1,9 +1,12 @@
-import { adicionarRotas } from './rotas.js';
+import express from "express";
+import cors from "cors";
+import { adicionarRotas } from "./rotas.js";
 
-import express from 'express'
-const api = express();
-api.use(express.json());
+const app = express();
+app.use(cors()); // 👈 ADICIONA ISSO ANTES DAS ROTAS
+app.use(express.json());
 
-adicionarRotas(api);
+adicionarRotas(app);
 
-api.listen(5010, () => console.log('..: API subiu com sucesso'))
+const PORT = process.env.PORT || 5010;
+app.listen(PORT, () => console.log(`🚀 API rodando em http://localhost:${PORT}`));

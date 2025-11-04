@@ -1,18 +1,33 @@
+import React from "react";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+import About from "../components/About";
+import Services from "../components/Services";
+import Testimonials from "../components/Testimonials";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
+import "../styles/landing.css";
+
 export default function Landing() {
-    return (
-      <div style={{ textAlign: 'center', padding: '80px' }}>
-        <h1>Radiadores Pinheiro</h1>
-        <p>Troca de colmeias, limpeza e manutenção de radiadores automotivos.</p>
-        <a href="/login" style={{
-          display: 'inline-block',
-          marginTop: 20,
-          background: '#007bff',
-          color: 'white',
-          padding: '10px 20px',
-          borderRadius: '6px',
-          textDecoration: 'none'
-        }}>Área da Empresa</a>
-      </div>
-    );
-  }
-  
+  return (
+    <div className="landing">
+      <Header />
+      <main>
+        <Hero />
+        <section id="about">
+          <About />
+        </section>
+        <section id="services">
+          <Services />
+        </section>
+        <section id="testimonials">
+          <Testimonials />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}

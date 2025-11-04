@@ -1,0 +1,142 @@
+/* === SEÇÃO ABOUT === */
+.about {
+  padding: 6rem 10%;
+  background-color: #f9fafb; /* leve cinza para contraste com outras seções */
+  color: #000;
+}
+
+/* Container principal */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grade responsiva */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* === CONTEÚDO === */
+.about-content {
+  text-align: left;
+}
+
+.about-title {
+  color: #00bcd4;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.about-text {
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* === ESTATÍSTICAS === */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1.2rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border: 2px solid #00bcd4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f0fcff;
+}
+
+.stat-icon {
+  color: #00bcd4;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  color: #000;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* === IMAGEM === */
+.about-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image {
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+  z-index: 2;
+}
+
+.about-image-accent {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 12rem;
+  height: 12rem;
+  background-color: #00bcd4;
+  border-radius: 0.5rem;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 767px) {
+  .about {
+    padding: 4rem 5%;
+    text-align: center;
+  }
+
+  .about-content {
+    text-align: center;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image-accent {
+    display: none;
+  }
+
+  .about-image {
+    max-width: 100%;
+  }
+}

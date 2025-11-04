@@ -1,0 +1,93 @@
+.header {
+  width: 100vw; /* evita sobras e barras laterais */
+  background-color: #000;
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s;
+}
+
+.header-logo-btn:hover {
+  opacity: 0.8;
+}
+
+.header-icon {
+  width: 32px;
+  height: 32px;
+  color: #22d3ee;
+}
+
+.header-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.header-subtitle {
+  font-size: 0.75rem;
+  color: #22d3ee;
+  text-align: left;
+}
+
+.header-nav {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .header-nav {
+    display: flex;
+  }
+}
+
+.header-nav-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.header-nav-link:hover {
+  color: #22d3ee;
+}
+
+.header-nav-btn {
+  background-color: #22d3ee;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.header-nav-btn:hover {
+  background-color: #06b6d4;
+}
