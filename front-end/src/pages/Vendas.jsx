@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Sidebar';
 
 export default function Vendas() {
   const [vendas, setVendas] = useState([]);

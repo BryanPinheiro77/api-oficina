@@ -1,0 +1,236 @@
+:root {
+  --bg: #0a0a0a;
+  --card-bg: #111827;
+  --ink: #f9fafb;
+  --muted: #94a3b8;
+  --cyan: #22d3ee;
+  --cyan-dark: #0ea5b4;
+  --line: #1e293b;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  --radius: 16px;
+}
+
+/* FUNDO GERAL */
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* CONTAINER */
+.dash-wrap {
+  max-width: 4400px; /* ← aumentei para esticar tudo */
+  margin: 40px auto;
+  padding: 0 30px 80px;
+}
+
+/* CABEÇALHO */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dashboard-page {
+  background-color: #0f172a;
+  min-height: 100vh;
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.btn-exit {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-exit:hover {
+  background: #dc2626;
+}
+
+/* ALERTA */
+.dash-alert {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #f87171;
+  color: #fecaca;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* GRID DE CARDS */
+.dash-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 24px 28px;
+}
+
+.card-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--cyan);
+}
+
+/* GRÁFICO */
+.chart-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 28px;
+  margin-bottom: 25px;
+}
+
+.chart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.chart-head span {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.chart-head small {
+  color: var(--muted);
+}
+
+/* gráfico um pouco menor e centralizado */
+.chart-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 280px; /* ↓ antes era 340px */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* TABELA */
+.table-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+
+.table-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.table-head h3 {
+  color: var(--ink);
+}
+
+.filter {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  background: #0f172a;
+  color: var(--ink);
+}
+.filter:focus {
+  border-color: var(--cyan);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px; /* ← deixa mais larga */
+}
+
+.table thead th {
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.table tbody td {
+  padding: 14px 12px;
+  color: var(--ink);
+  border-bottom: 1px solid #1e293b;
+}
+
+.muted {
+  color: var(--muted);
+  text-align: center;
+  padding: 18px;
+}
+
+.btn-small {
+  background: var(--cyan);
+  color: #000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-small:hover {
+  background: var(--cyan-dark);
+}
+
+/* ANIMAÇÃO SKELETON */
+.skeleton {
+  background: linear-gradient(90deg, #1f2937 25%, #111827 50%, #1f2937 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .dash-grid-cards {
+    grid-template-columns: 1fr;
+  }
+  .chart-body {
+    min-height: 240px;
+  }
+}

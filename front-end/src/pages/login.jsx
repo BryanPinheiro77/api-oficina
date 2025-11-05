@@ -20,7 +20,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>Login - Oficina</h2>
+        <h2>Login - Administrador</h2>
         <form onSubmit={handleLogin}>
           <input
             type="text"
