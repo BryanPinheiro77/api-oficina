@@ -1,4 +1,4 @@
-import { connection } from './connection.js';
+import { connection } from "./connection.js";
 
 // 📦 Total de produtos e valor total em estoque
 export async function getOverview() {
@@ -19,17 +19,27 @@ export async function getSalesSummary() {
     FROM vendas;
   `);
 
-  // Define a meta manualmente (ou futuramente guarda em uma tabela)
+  // Define a meta manualmente (pode vir de tabela "configuracoes" futuramente)
   const target = 50000;
-  return { sold: rows[0].sold, target };
+  return { sold: Number(rows[0].sold || 0), target };
 }
 
-// ⚠️ Produtos com estoque baixo (menor que 5 unidades)
+// ⚠️ Produtos com estoque baixo
 export async function getLowStock() {
-  const [rows] = await connection.query(`
+  const LIMITE_ESTOQUE_BAIXO = 10; // 🔥 limite padrão
+  const [rows] = await connection.query(
+    `
     SELECT id, nome, estoque, preco
     FROM produtos
-    WHERE estoque < 5;
-  `);
-  return rows;
+    WHERE estoque < ?;
+  `,
+    [LIMITE_ESTOQUE_BAIXO]
+  );
+
+  // Garante que valores sejam numéricos
+  return rows.map((p) => ({
+    ...p,
+    preco: Number(p.preco || 0),
+    estoque: Number(p.estoque || 0),
+  }));
 }

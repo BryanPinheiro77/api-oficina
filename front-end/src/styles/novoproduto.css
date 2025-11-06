@@ -1,0 +1,112 @@
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --line: #1e293b;
+  --ink: #f9fafb;
+  --muted: #94a3b8;
+  --cyan: #22d3ee;
+  --cyan-dark: #0ea5b4;
+  --radius: 14px;
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* fundo da página */
+.produto-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* card principal */
+.form-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 40px 50px;
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+/* título */
+.form-card h1 {
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  color: var(--ink);
+}
+
+/* campos */
+.form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-card input,
+.form-card select {
+  background: #0b1220;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+  border-color: var(--cyan);
+}
+
+/* botões */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background: var(--cyan);
+  color: #000;
+  font-weight: 700;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-primary:hover {
+  background: var(--cyan-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  border-color: var(--cyan);
+}
+
+/* animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

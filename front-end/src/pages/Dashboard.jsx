@@ -1,5 +1,6 @@
 import Navbar from "../components/Sidebar";
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import api from "../services/api";
@@ -10,15 +11,13 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
-  const [overview, setOverview] = useState({
-    totalItens: 0,
-    stockValue: 0,
-  });
-  const [salesSummary, setSalesSummary] = useState({
-    sold: 0,
-    target: 50000,
-  });
+  const [overview, setOverview] = useState({ totalItens: 0, stockValue: 0 });
+  const [salesSummary, setSalesSummary] = useState({ sold: 0, target: 50000 });
   const [lowStock, setLowStock] = useState([]);
+  const navigate = useNavigate();
+
+  // 🔥 Filtro de produtos com estoque abaixo de 10
+  const produtosBaixoEstoque = lowStock.filter((p) => Number(p.estoque || 0) < 10);
 
   useEffect(() => {
     let ignore = false;
@@ -40,8 +39,7 @@ export default function Dashboard() {
           setLowStock(ls.data || []);
         }
       } catch (e) {
-        if (!ignore)
-          setErr("Não foi possível carregar os dados da dashboard.");
+        if (!ignore) setErr("Não foi possível carregar os dados da dashboard.");
       } finally {
         if (!ignore) setLoading(false);
       }
@@ -53,6 +51,7 @@ export default function Dashboard() {
     };
   }, []);
 
+  // 🎯 Dados do gráfico
   const chartData = useMemo(() => {
     const sold = Number(salesSummary.sold || 0);
     const target = Number(salesSummary.target || 0);
@@ -75,10 +74,7 @@ export default function Dashboard() {
     () => ({
       cutout: "65%",
       plugins: {
-        legend: {
-          position: "top",
-          labels: { color: "#f9fafb" },
-        },
+        legend: { position: "top", labels: { color: "#f9fafb" } },
         tooltip: { enabled: true },
       },
     }),
@@ -92,11 +88,11 @@ export default function Dashboard() {
       <div className="dash-wrap">
         <div className="dash-header">
           <h1>Bem-vindo(a)</h1>
-          
         </div>
 
         {err && <div className="dash-alert">{err}</div>}
 
+        {/* 🧩 Cards principais */}
         <div className="dash-grid-cards">
           <div className="card">
             <p className="card-label">Total de Itens</p>
@@ -114,6 +110,7 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* 📊 Gráfico */}
         <div className="dash-row">
           <div className="card chart-card">
             <div className="chart-head">
@@ -141,6 +138,7 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* 📦 Tabela de estoque baixo */}
         <div className="card table-card">
           <div className="table-head">
             <h3>Itens com Estoque Baixo</h3>
@@ -151,9 +149,7 @@ export default function Dashboard() {
                 const term = e.target.value.toLowerCase();
                 const elRows = document.querySelectorAll(".table tbody tr");
                 elRows.forEach((tr) => {
-                  tr.style.display = tr.innerText
-                    .toLowerCase()
-                    .includes(term)
+                  tr.style.display = tr.innerText.toLowerCase().includes(term)
                     ? ""
                     : "none";
                 });
@@ -179,25 +175,33 @@ export default function Dashboard() {
                       <div className="skeleton skeleton-row" />
                     </td>
                   </tr>
-                ) : lowStock.length === 0 ? (
+                ) : produtosBaixoEstoque.length === 0 ? (
                   <tr>
                     <td colSpan="5" className="muted">
                       Nenhum produto com estoque baixo!
                     </td>
                   </tr>
                 ) : (
-                  lowStock.map((p) => (
-                    <tr key={p.id || p.code}>
-                      <td>{p.code}</td>
-                      <td>{p.name}</td>
-                      <td>{p.qty}</td>
+                  produtosBaixoEstoque.map((p) => (
+                    <tr
+                      key={p.id}
+                      className={Number(p.estoque || 0) < 5 ? "low-stock" : ""}
+                    >
+                      <td>{p.id}</td>
+                      <td>{p.nome}</td>
+                      <td>{p.estoque}</td>
                       <td>
-                        {Number(p.price || 0).toLocaleString("pt-BR", {
+                        {Number(p.preco || 0).toLocaleString("pt-BR", {
                           minimumFractionDigits: 2,
                         })}
                       </td>
                       <td>
-                        <button className="btn-small">Ver</button>
+                        <button
+                          className="btn-small"
+                          onClick={() => navigate(`/produtos?id=${p.id}`)}
+                        >
+                          Ver
+                        </button>
                       </td>
                     </tr>
                   ))
