@@ -1,0 +1,242 @@
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --ink: #f9fafb;
+  --muted: #94a3b8;
+  --line: #1e293b;
+  --cyan: #22d3ee;
+  --cyan-dark: #0ea5b4;
+  --radius: 12px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ======== LAYOUT ======== */
+.novaVenda-page {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.novaVenda-content {
+  flex: 1;
+  padding: 40px 32px;
+  margin-left: 240px;
+
+  /* CENTRALIZA TUDO */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.novaVenda-content h1 {
+  font-size: 1.9rem;
+  margin-bottom: 25px;
+}
+
+/* ======== CARD PRINCIPAL ======== */
+.form-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 30px;
+
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ======== Inputs ======== */
+.form-card input,
+.form-card select {
+  width: 100%;
+  background: #0b1220;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+  border-color: var(--cyan);
+}
+
+/* ======== Autocomplete ======== */
+.autocomplete {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-top: -8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.autocomplete .item {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.autocomplete .item:hover {
+  background: #1b2537;
+}
+
+/* ======== Botão Adicionar ======== */
+.btn-add {
+  background: var(--cyan);
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-add:hover {
+  background: var(--cyan-dark);
+}
+
+/* ======== Tabela de Itens ======== */
+.tabela-itens {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.tabela-itens th {
+  padding: 14px;
+  background: #162036;
+  color: var(--muted);
+  text-align: left;
+}
+
+.tabela-itens td {
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.btn-remove {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-remove:hover {
+  background: #dc2626;
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ======== DESCONTO ======== */
+.desconto-box {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 800px;
+  align-items: center;
+}
+
+.desconto-box input,
+.desconto-box select {
+  background: #0b1220;
+  color: var(--ink);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  width: 150px;
+}
+
+.desconto-box input:focus,
+.desconto-box select:focus {
+  border-color: var(--cyan);
+}
+
+/* ======== TOTAL ======== */
+.total-box {
+  margin-top: 20px;
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  font-size: 1.4rem;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* ======== PAGAMENTO ======== */
+.pagamento {
+  margin-top: 25px;
+  width: 300px;
+  background: #0b1220;
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+}
+
+.pagamento:focus {
+  border-color: var(--cyan);
+}
+
+/* ======== FINALIZAR ======== */
+.btn-finalizar {
+  margin-top: 25px;
+  background: var(--cyan);
+  border: none;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  width: 300px;
+}
+
+.btn-finalizar:hover {
+  background: var(--cyan-dark);
+}
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 900px) {
+  .novaVenda-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .form-card,
+  .tabela-itens,
+  .total-box {
+    max-width: 100%;
+  }
+
+  .btn-finalizar {
+    width: 100%;
+  }
+}

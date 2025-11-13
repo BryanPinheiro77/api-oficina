@@ -15,20 +15,35 @@ export default function NovaCategoria() {
   }
 
   return (
-    <div className="produtos-page">
+    <div className="nova-page">
       <Sidebar />
-      <div className="produtos-content">
-        <h1>Nova Categoria</h1>
-        <form onSubmit={salvar} className="form-produto">
-          <input
-            placeholder="Nome da categoria"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-          <button type="submit" className="btn-primario">
-            Salvar
-          </button>
-        </form>
+
+      <div className="nova-content">
+        <div className="nova-card">
+          <h1>Nova Categoria</h1>
+
+          <form onSubmit={salvar}>
+            <input
+              placeholder="Nome da categoria"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+
+            <div className="btns">
+              <button type="submit" className="btn-primary">
+                Salvar
+              </button>
+
+              <button
+                type="button"
+                className="btn-ghost"
+                onClick={() => navigate("/produtos")}
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

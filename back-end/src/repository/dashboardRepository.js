@@ -1,6 +1,8 @@
 import { connection } from "./connection.js";
 
-// 📦 Total de produtos e valor total em estoque
+/* ============================================
+   📦 TOTAL DE ITENS E VALOR EM ESTOQUE
+============================================ */
 export async function getOverview() {
   const [rows] = await connection.query(`
     SELECT 
@@ -11,22 +13,25 @@ export async function getOverview() {
   return rows[0];
 }
 
-// 💰 Resumo de vendas (valor total vendido e meta mensal)
+/* ============================================
+   💰 RESUMO DE VENDAS (VALOR TOTAL + META)
+============================================ */
 export async function getSalesSummary() {
-  // Pega o total vendido somando os campos da tabela vendas
   const [rows] = await connection.query(`
     SELECT COALESCE(SUM(total), 0) AS sold
     FROM vendas;
   `);
 
-  // Define a meta manualmente (pode vir de tabela "configuracoes" futuramente)
-  const target = 50000;
+  const target = 50000; // futura config
   return { sold: Number(rows[0].sold || 0), target };
 }
 
-// ⚠️ Produtos com estoque baixo
+/* ============================================
+   ⚠️ PRODUTOS COM ESTOQUE BAIXO
+============================================ */
 export async function getLowStock() {
-  const LIMITE_ESTOQUE_BAIXO = 10; // 🔥 limite padrão
+  const LIMITE_ESTOQUE_BAIXO = 10;
+
   const [rows] = await connection.query(
     `
     SELECT id, nome, estoque, preco
@@ -36,10 +41,81 @@ export async function getLowStock() {
     [LIMITE_ESTOQUE_BAIXO]
   );
 
-  // Garante que valores sejam numéricos
   return rows.map((p) => ({
     ...p,
     preco: Number(p.preco || 0),
     estoque: Number(p.estoque || 0),
   }));
+}
+
+/* ============================================
+   🟣 NOVO: VENDAS POR PERÍODO
+   (dia, semana, mes, ano, custom)
+============================================ */
+export async function getSalesByPeriod(period, start, end) {
+  let where = "";
+  const params = [];
+
+  switch (period) {
+    case "dia":
+      where = "DATE(criado_em) = CURDATE()";
+      break;
+
+    case "semana":
+      where = "YEARWEEK(criado_em, 1) = YEARWEEK(CURDATE(), 1)";
+      break;
+
+    case "mes":
+      where =
+        "YEAR(criado_em) = YEAR(CURDATE()) AND MONTH(criado_em) = MONTH(CURDATE())";
+      break;
+
+    case "ano":
+      where = "YEAR(criado_em) = YEAR(CURDATE())";
+      break;
+
+    case "custom":
+      where = "DATE(criado_em) BETWEEN ? AND ?";
+      params.push(start, end);
+      break;
+
+    default:
+      where = "criado_em >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+      break;
+  }
+
+  // TOTAL E QUANTIDADE
+  const [[totais]] = await connection.query(
+    `
+      SELECT 
+        COALESCE(SUM(total), 0) AS total,
+        COUNT(*) AS quantidade
+      FROM vendas
+      WHERE ${where};
+    `,
+    params
+  );
+
+  // SÉRIE DIÁRIA PARA GRÁFICO
+  const [series] = await connection.query(
+    `
+      SELECT 
+        DATE(criado_em) AS dia,
+        SUM(total) AS total
+      FROM vendas
+      WHERE ${where}
+      GROUP BY DATE(criado_em)
+      ORDER BY dia ASC;
+    `,
+    params
+  );
+
+  return {
+    total: Number(totais.total || 0),
+    quantidade: Number(totais.quantidade || 0),
+    series: series.map((s) => ({
+      dia: s.dia,
+      total: Number(s.total || 0),
+    })),
+  };
 }

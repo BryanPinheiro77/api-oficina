@@ -1,7 +1,7 @@
-CREATE DATABASE IF NOT EXISTS oficina;
+CREATE DATABASE oficina;
 USE oficina;
 
--- Usuários
+-- Usuários (não usado nas vendas, mas pode manter)
 CREATE TABLE usuarios (
   id INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(100),
@@ -13,38 +13,42 @@ CREATE TABLE usuarios (
 INSERT INTO usuarios (nome, email, senha_md5, role)
 VALUES ('Admin', 'admin@oficina.com', MD5('123456'), 'admin');
 
--- Categorias
+
+-- Categorias dos produtos
 CREATE TABLE categorias (
   id INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(100)
 );
+
 
 -- Produtos
 CREATE TABLE produtos (
   id INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(100),
   preco DECIMAL(10,2),
-  estoque INT,
+  estoque INT DEFAULT 0,
   categoria_id INT,
   FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
 
--- Vendas
+
+-- Vendas (AGORA compatível com o backend)
 CREATE TABLE vendas (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  usuario_id INT,
+  cliente_id INT NULL,
   total DECIMAL(10,2),
-  criado_em DATETIME DEFAULT NOW(),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+  forma_pagamento VARCHAR(20) DEFAULT 'Dinheiro',
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Itens da venda
+
+-- Itens da Venda (compatível com o backend)
 CREATE TABLE itens_venda (
   id INT PRIMARY KEY AUTO_INCREMENT,
   venda_id INT,
   produto_id INT,
-  quantidade INT,
-  preco_unitario DECIMAL(10,2),
+  qtd INT,
+  preco_unit DECIMAL(10,2),
   FOREIGN KEY (venda_id) REFERENCES vendas(id),
   FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );

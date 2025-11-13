@@ -20,7 +20,6 @@ export default function Sidebar() {
         <button onClick={() => navigate("/dashboard")} className="sidebar-link">Dashboard</button>
         <button onClick={() => navigate("/produtos")} className="sidebar-link">Produtos</button>
         <button onClick={() => navigate("/vendas")} className="sidebar-link">Vendas</button>
-        <button onClick={() => navigate("/config")} className="sidebar-link">Configurações</button>
       </nav>
 
       <button className="sidebar-logout" onClick={handleLogout}>Sair</button>

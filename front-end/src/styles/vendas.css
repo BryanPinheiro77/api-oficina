@@ -1,0 +1,219 @@
+/* ================================
+   VARIABLES / THEME
+================================ */
+:root {
+  --sidebar-width: 240px;
+
+  --bg: #0f172a;
+  --card-bg: #111827;
+  --line: #1e293b;
+  --ink: #f9fafb;
+  --muted: #94a3b8;
+  --cyan: #22d3ee;
+  --cyan-dark: #0ea5b4;
+
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* ================================
+   PAGE BASE
+================================ */
+.vendas-page {
+  display: flex;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--ink);
+}
+
+.vendas-content {
+  flex: 1;
+  padding: 40px 60px;
+  margin-left: var(--sidebar-width);
+  box-sizing: border-box;
+}
+
+/* ===========================================
+   HEADER + BOTÃO NOVA VENDA
+=========================================== */
+.vendas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.vendas-header h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.btn-nova-venda {
+  background: var(--cyan);
+  border: none;
+  padding: 12px 24px;
+  color: #000;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.btn-nova-venda:hover {
+  background: var(--cyan-dark);
+}
+
+/* ================================
+   FORM DE REGISTRO DE VENDA (APAGADO NA LISTA)
+   ⚠️ AINDA EXISTE AQUI MAS NÃO É MAIS USADO
+   (deixe caso queira reaproveitar)
+================================ */
+.form-venda {
+  display: flex;
+  gap: 16px;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  margin-bottom: 45px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.form-venda label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--muted);
+  min-width: 160px;
+}
+
+.form-venda input,
+.form-venda select {
+  background: #0f172a;
+  color: var(--ink);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+  margin-top: 6px;
+}
+
+.form-venda button {
+  background: var(--cyan);
+  border: none;
+  padding: 12px 18px;
+  color: #000;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  align-self: end;
+  transition: 0.2s;
+}
+
+.form-venda button:hover {
+  background: var(--cyan-dark);
+}
+
+/* ================================
+   AUTOCOMPLETE
+================================ */
+.autocomplete-list {
+  position: absolute;
+  top: 78px;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  width: 230px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.autocomplete-item {
+  padding: 12px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.autocomplete-item:hover {
+  background: #1d2433;
+}
+
+/* ================================
+   TABELA DE VENDAS
+================================ */
+.tabela-vendas {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 28px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.tabela-vendas table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-vendas th {
+  color: var(--muted);
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.tabela-vendas td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #1e293b;
+  color: var(--ink);
+}
+
+.muted {
+  color: var(--muted);
+  text-align: center;
+  padding: 20px;
+}
+
+/* BOTÃO EXCLUIR VENDA */
+.btn-remove-venda {
+  background: #ef4444;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.btn-remove-venda:hover {
+  background: #dc2626;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .vendas-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .form-venda {
+    flex-direction: column;
+  }
+
+  .vendas-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .btn-nova-venda {
+    width: 100%;
+    text-align: center;
+  }
+}

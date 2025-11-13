@@ -4,6 +4,7 @@ import Login from "./pages/login";
 import Dashboard from "./pages/Dashboard";
 import Produtos from "./pages/Produtos";
 import Vendas from "./pages/Vendas";
+import NovaVenda from "./pages/NovaVenda"
 import NovoProduto from "./pages/NovoProduto";
 import NovaCategoria from "./pages/NovaCategoria";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -36,6 +37,10 @@ export default function AppRouter() {
         <Route
           path="/vendas"
           element={<ProtectedRoute component={Vendas} />}
+        />
+        <Route
+          path="/vendas/nova"
+          element={<ProtectedRoute component={NovaVenda} />}
         />
       </Routes>
     </BrowserRouter>
